@@ -2,7 +2,7 @@
 public class Move : IMove
 {
     public List<Piece> itIsAOkPlayed(List<Piece> hand)
-    {
+    {//test
         List<Piece> okPlayed = new List<Piece>();
         Action action = new Action();
         if (Table.piecesInGame.Count == 0) return hand;
