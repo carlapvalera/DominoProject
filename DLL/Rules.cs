@@ -6,6 +6,7 @@ public class Action : IAction// implemetacion de la interface
     {
         List<Piece> aux = new();
         aux = Double(hand);
+        if (aux.Count > 0) Add = true;
         foreach (Piece piece in aux)
             hand.Add(piece);
         return hand;

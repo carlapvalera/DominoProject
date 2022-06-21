@@ -79,8 +79,8 @@ interface IAction
 // modela la posibilidad de que existan determinadas piexzas que se puedan jugar en cualquien momento del juego o con las que no se pueda jugar
 {
     bool Add { get; set; }
-    List<Piece> ToAdd(List<Piece> hand);// en el caso que los dobles se puedan jugar en cualquier momento del juego
-    List<Piece> ToSub(List<Piece> hand);// en el caso que los dobles no se puedan jugar en juego
+    List<Piece> ToAdd(List<Piece> hand);// en el caso que las fichas se puedan jugar en cualquier momento del juego
+    List<Piece> ToSub(List<Piece> hand);// en el caso que las fichas no se puedan jugar en juego
 
 }
 interface IPassToPass
