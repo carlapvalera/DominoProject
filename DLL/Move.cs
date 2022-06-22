@@ -5,7 +5,7 @@ public class Move : IMove
     {
         List<Piece> okPlayed = new List<Piece>();
         Action action = new Action();
-        if (Table.piecesInGame.Count == 0) return hand;
+        if (Table.piecesInGame == null) return hand;
         for (int i = 0; i < hand.Count; i++)
         {
             if (hand[i].left == Table.left || hand[i].left == Table.right || hand[i].right == Table.left

@@ -21,7 +21,7 @@ class Coach
         {
             Console.WriteLine(players[i].Name);
         }
-        Generator. generator = new Generator(9);
+        Generator generator = new Generator(9);
         Distribute distribute = new Distribute(players, 10);
         Final final = new Final();
         ClassicStart start = new ClassicStart(players, Table.piecesOutGame);

@@ -23,6 +23,16 @@ public class Distribute : IDistribution
             }
         Table.piecesOutGame = total;
     }
+    private List<Piece> Game (List<Player> players)
+    {
+        List<Piece> player_aux = new();
+        foreach (var player in players)
+            foreach (var item in player.Hand)
+            {
+                player_aux.Add(item);
+            }
+        return player_aux;
+    }
     private List<Piece> Clone(List<Piece> val)
     {
         List<Piece> aux = new();

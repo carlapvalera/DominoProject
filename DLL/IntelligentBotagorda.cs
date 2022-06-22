@@ -4,7 +4,7 @@ public class IntelligentBotagorda : IStrategy//implementacion de la interface
     List<Piece> itIsOkPlayed = new List<Piece>();
     Player player = new Player();
     int cursor = 0;
-    public IntelligentBotagorda(Table table, List<Piece> itIsOkPlayed, Player player, int cursor)
+    public IntelligentBotagorda(List<Piece> itIsOkPlayed, Player player, int cursor)
     {
         this.itIsOkPlayed = itIsOkPlayed;
         this.player = player;

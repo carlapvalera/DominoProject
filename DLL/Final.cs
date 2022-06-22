@@ -3,29 +3,33 @@ public class Final : IFinal
 {
     public bool EndGame(List<Player> players)//revisar el metodo el ultimo false
     {
-        List<Player> pass = Clone(Table.Pass);
         List<Player> notplay = new List<Player>();
         List<Player> order = new List<Player>();
-        // debido al jugador en el que se inicializan los pases averiguar el ciclo necesario para que se termine el juego
-        foreach (var item in players)
+        List<Player> pass = new();
+        if (Table.Pass != null)
         {
-            if (item.Hand.Count == 0)
-                return true;
-            else
+            pass = Clone(Table.Pass);
+
+            // debido al jugador en el que se inicializan los pases averiguar el ciclo necesario para que se termine el juego
+            foreach (var item in players)
             {
-                foreach (var x in pass)
+                if (item.Hand.Count == 0)
+                    return true;
+                else
                 {
-                    notplay.Add(x);// lista de jugadores pasados 
+                    foreach (var x in pass)
+                    {
+                        notplay.Add(x);// lista de jugadores pasados 
 
-                    if (notplay.Count == 1)
-                        order = Necesary(notplay[0], players);// crear el ciclo dado por el jugador actual
+                        if (notplay.Count == 1)
+                            order = Necesary(notplay[0], players);// crear el ciclo dado por el jugador actual
+                    }
+
+                    return TablePass(order,ref notplay);// comprobar si se cumplio el ciclo
                 }
-
-                return TablePass(order, notplay);// comprobar si se cumplio el ciclo
             }
         }
         return false;
-
     }
     private List<Player> Clone(List<Player> val)//hacer una copia de la lista
     {
@@ -65,7 +69,7 @@ public class Final : IFinal
             lol++;
         }
     }
-    private bool TablePass(List<Player> order, List<Player> notplay)
+    private bool TablePass(List<Player> order, ref List<Player> notplay)
     // comprobar si ya se paso tod a la mesa y se finalizo el juego por ende
     {
         if (order.Count == 0 || notplay.Count == 0)
@@ -77,6 +81,7 @@ public class Final : IFinal
             {
                 if (notplay[count] != order[count])
                     notplay.Remove(item);
+                TablePass(order, ref notplay);
             }
             else if (notplay.Count == order.Count)
                 return true;
