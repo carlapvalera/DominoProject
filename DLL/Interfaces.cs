@@ -23,7 +23,7 @@ public interface IStrategy// interface que define las estrategias de cada jugado
     Piece PieceToPlay(List<Piece> itIsOkPlayed, Player player, int cursor);
     //metodo que define la pieza a jugar por el jugador que utilice esta estrategia
 
-    List<Piece> PieceCanPlay( List<Piece> itIsOkPlayed, Player player, int cursor)
+    List<Piece> PieceCanPlay(List<Piece> itIsOkPlayed, Player player, int cursor, Table table)
     /*lista de piezas que que se a partir de la que la estrategia escoge una para que el jugador jugue vale acotar que esta
     lista de fichas son nada mas que las que contienen las caras que ya se sabe previamente (se ha probado enel jugo que el
     jugador no lleva)*/
@@ -33,7 +33,7 @@ public interface IStrategy// interface que define las estrategias de cada jugado
         List<Piece> jugadasinteligentes = new List<Piece>();
         for (int i = 0; i < itIsOkPlayed.Count; i++)
         {
-            if (Table.left == itIsOkPlayed[i].left || Table.right == itIsOkPlayed[i].left)
+            if (table.left == itIsOkPlayed[i].left || table.right == itIsOkPlayed[i].left)
             {
                 aux.Add(itIsOkPlayed[i].right);
             }
@@ -83,7 +83,7 @@ interface IAction
     List<Piece> ToSub(List<Piece> hand);// en el caso que las fichas no se puedan jugar en juego
 
 }
-interface IPassToPass:IEnumerable<Player>
+interface IPassToPass : IEnumerable<Player>
 {
 
 }

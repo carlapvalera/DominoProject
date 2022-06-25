@@ -3,16 +3,18 @@
 namespace Project;
 public class Pass : IPassToPass
 {
-    List<Player> players = new();
-    Player player = new();
+    List<Player> players;
+    Player player;
     public Pass(List<Player> players, Player player)
     {
         this.players = players;
 
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i]== player)
-            this.player = player;
+            //COMO VA A SABER QUIEN ES PLAYER SI NUNCA SE DECLARA? ARRIBA LO INSTANCIABAS PERO Q HACES CON ESO INSTANCIADO? ES UN JUGADOR NUEVO
+            //REVISA ESO
+            if (players[i] == player)
+                this.player = player;
             Change();
         }
     }
@@ -21,7 +23,7 @@ public class Pass : IPassToPass
         List<Player> player_aux = new();
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i] ==player)
+            if (players[i] == player)
             {
                 for (int j = i; j < players.Count; j++)
                 {
@@ -29,7 +31,7 @@ public class Pass : IPassToPass
                 }
                 for (int k = 0; k < i; k++)
                 {
-                    player_aux.Insert(0,players[k]);
+                    player_aux.Insert(0, players[k]);
                 }
             }
 
