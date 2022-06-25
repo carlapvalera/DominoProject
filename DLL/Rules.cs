@@ -1,7 +1,12 @@
 namespace Project;
 public class Action : IAction// implemetacion de la interface
 {
+    Table table;
     public bool Add { get; set; }
+    public Action(Table table)
+    {
+        this.table = table;
+    }
     public List<Piece> ToAdd(List<Piece> hand)
     {
         List<Piece> aux = new();
@@ -14,8 +19,6 @@ public class Action : IAction// implemetacion de la interface
     public List<Piece> ToSub(List<Piece> hand)
     {
         List<Piece> aux = new();
-
-        Table table = new();
         bool change;
         int count = hand.Count;
         do
@@ -47,7 +50,7 @@ public class Action : IAction// implemetacion de la interface
         list = NewDistribute(hand, n);
         foreach (Piece piece in aux)
         {
-            Table.piecesOutGame.Add(piece);
+            table.piecesOutGame.Add(piece);
         }
         foreach (Piece piece in list)
         {
@@ -61,9 +64,9 @@ public class Action : IAction// implemetacion de la interface
         int aux = 0;
         for (int i = 0; i < n; i++)
         {
-            aux = random.Next(Table.piecesOutGame.Count);
-            hand.Add(Table.piecesOutGame[aux]);
-            Table.piecesOutGame.RemoveAt(aux);
+            aux = random.Next(table.piecesOutGame.Count);
+            hand.Add(table.piecesOutGame[aux]);
+            table.piecesOutGame.RemoveAt(aux);
         }
         return hand;
     }

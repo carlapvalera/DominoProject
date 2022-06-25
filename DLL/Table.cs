@@ -3,19 +3,29 @@ public class Table
 {
     public List<Player> players { get; }
 
-    public static IStart? start { get; set; }
+    public IStart? start { get; set; }
 
-    public static int[] stats { get; set; }
+    public int[] stats { get; set; }
 
-    public static List<Piece> piecesInGame { get; set; }
+    public List<Piece> piecesInGame { get; set; }
 
-    public static List<Piece> piecesOutGame { get; set; }
+    public List<Piece> piecesOutGame { get; set; }
 
-    public static List<Player> Pass { get; set; }
+    public List<Player> Pass { get; set; }
 
-    public static List<Piece> piecesTotal { get; set; }
+    public List<Piece> piecesTotal { get; set; }
 
-    public static int left
+    public Table(int playersCount)
+    {
+        players = new();
+        piecesInGame = new();
+        piecesOutGame = new();
+        Pass = new();
+        piecesTotal = new();
+        stats = new int[playersCount]; //no se q es stats, hice esto para q no saliera un error
+    }
+
+    public int left
     {
         get
         {
@@ -24,11 +34,11 @@ public class Table
             else
                 return -1;
 
-        } 
+        }
     }
 
 
-    public static int right 
+    public int right
     {
         get
         {
@@ -37,13 +47,13 @@ public class Table
             else
                 return -1;
 
-        } 
+        }
     }
-    public static void Eject(Piece piece)
+    public void Eject(Piece piece)
     {
         if (piece != null)
         {
-            if (piecesInGame== null || piece.right == left) ToLeft(piece);
+            if (piecesInGame == null || piece.right == left) ToLeft(piece);
             else if (piece.left == right) ToRight(piece);
             else
             {
@@ -54,21 +64,21 @@ public class Table
             stats[piece.right]++;
         }
     }
-    public static void ToLeft(Piece piece)
+    public void ToLeft(Piece piece)
     {
-        if(piecesInGame==null)
+        if (piecesInGame == null)
         {
             List<Piece> pieces = new List<Piece>();
             pieces.Add(piece);
             piecesInGame = pieces;
         }
-        else 
-            piecesInGame.Add(piece);    
+        else
+            piecesInGame.Add(piece);
     }
 
-    public static void ToRight(Piece piece)
+    public void ToRight(Piece piece)
     {
-        if(piecesInGame != null)
+        if (piecesInGame != null)
         {
             piecesInGame.Insert(piecesInGame.Count, piece);
         }

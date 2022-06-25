@@ -1,12 +1,17 @@
 namespace Project;
 public class InteligentStrategy : IStrategy
 {
+    Table table;
+    public InteligentStrategy(Table table)
+    {
+        this.table = table;
+    }
     public Piece PieceToPlay(List<Piece> itIsOkPlayed, Player player, int cursor)
     {
         List<int> aux = new List<int>();
         for (int i = 0; i < itIsOkPlayed.Count; i++)
         {
-            if (Table.left == itIsOkPlayed[i].left || Table.right == itIsOkPlayed[i].left)
+            if (table.left == itIsOkPlayed[i].left || table.right == itIsOkPlayed[i].left)
             {
                 aux.Add(itIsOkPlayed[i].right);
             }
@@ -24,9 +29,9 @@ public class InteligentStrategy : IStrategy
                     return itIsOkPlayed[j];
             }
         }
-        int piecesNotGame = Table.piecesTotal.Count - Table.piecesInGame.Count;
+        int piecesNotGame = table.piecesTotal.Count - table.piecesInGame.Count;
 
-        int[] statsAux = Table.stats;
+        int[] statsAux = table.stats;
         for (int i = 0; i < player.Hand.Count; i++)
         {
             statsAux[player.Hand[i].left]++;

@@ -26,9 +26,10 @@ public class PlayerStart : IStart
 
     List<Piece> pieceOutGame = new();
     int aux = 0;
-    Table table = new Table();
-    public PlayerStart(List<Player> players, List<Piece> pieceOutGame)
+    Table table;
+    public PlayerStart(List<Player> players, List<Piece> pieceOutGame, Table table)
     {
+        this.table = table;
         Random random = new Random();
         aux = random.Next(0, players.Count);
         this.players = players;

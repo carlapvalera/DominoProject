@@ -1,15 +1,16 @@
 ﻿namespace Project;
 public class IntelligentRandom : IStrategy
 {
-    public IntelligentRandom()
+    Table table;
+    public IntelligentRandom(Table table)
     {
-
+        this.table = table;
     }
     public Piece PieceToPlay(List<Piece> itIsOkPlayed, Player player, int cursor)
     {
         List<Piece> intelligentplays = new List<Piece>();
-        IStrategy istrategy = new IntelligentBotagorda();
-        intelligentplays = istrategy.PieceCanPlay(itIsOkPlayed, player, cursor);
+        IStrategy istrategy = new IntelligentBotagorda(table);
+        intelligentplays = istrategy.PieceCanPlay(itIsOkPlayed, player, cursor, table);
         if (intelligentplays.Count != 0)
         {
             return OK(intelligentplays);
@@ -26,7 +27,7 @@ public class IntelligentRandom : IStrategy
     private Piece? OK(List<Piece> intelligent)
     {
         Random random = new Random();
-        if(intelligent.Count !=0)
+        if (intelligent.Count != 0)
         {
             int item = random.Next(0, intelligent.Count);
             return intelligent[item];

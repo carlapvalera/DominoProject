@@ -3,8 +3,10 @@ public class Distribute : IDistribution
 {
     List<Player> players = new();
     int distribute = 0;
-    public Distribute(List<Player> players, int distribute)
+    Table table;
+    public Distribute(List<Player> players, int distribute, Table table)
     {
+        this.table = table;
         this.players = players;
         this.distribute = distribute;
         Distribution();
@@ -13,7 +15,7 @@ public class Distribute : IDistribution
     {
         Random random = new Random();
         List<Piece> total = new List<Piece>();
-        total = Clone(Table.piecesTotal);
+        total = Clone(table.piecesTotal);
         for (int j = 0; j < distribute; j++)
             for (int i = 0; i < players.Count; i++)
             {
@@ -21,9 +23,9 @@ public class Distribute : IDistribution
                 players[i].Hand.Add(total[a]);
                 total.RemoveAt(a);
             }
-        Table.piecesOutGame = total;
+        table.piecesOutGame = total;
     }
-    private List<Piece> Game (List<Player> players)
+    private List<Piece> Game(List<Player> players)
     {
         List<Piece> player_aux = new();
         foreach (var player in players)
@@ -42,5 +44,4 @@ public class Distribute : IDistribution
         }
         return aux;
     }
-
 }
