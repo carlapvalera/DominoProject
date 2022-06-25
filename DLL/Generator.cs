@@ -4,6 +4,7 @@ public class Generator//genera la cantidad de piezas del juego en base a uma can
     public Generator(int amount)
     {
         PiecesGenerator(amount);
+        Table.stats = new int[amount+1];
     }
     public void PiecesGenerator(int amount)
     {

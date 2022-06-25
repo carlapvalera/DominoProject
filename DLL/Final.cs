@@ -6,7 +6,7 @@ public class Final : IFinal
         List<Player> notplay = new List<Player>();
         List<Player> order = new List<Player>();
         List<Player> pass = new();
-        if (Table.Pass != null)
+        if (Table.Pass != null || Table.Pass.Count !=0)
         {
             pass = Clone(Table.Pass);
 

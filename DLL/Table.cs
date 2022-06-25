@@ -5,15 +5,15 @@ public class Table
 
     public static IStart? start { get; set; }
 
-    public static int[]? stats { get; set; }
+    public static int[] stats { get; set; }
 
-    public static List<Piece>? piecesInGame { get; set; }
+    public static List<Piece> piecesInGame { get; set; }
 
-    public static List<Piece>? piecesOutGame { get; set; }
+    public static List<Piece> piecesOutGame { get; set; }
 
-    public static List<Player>? Pass { get; set; }
+    public static List<Player> Pass { get; set; }
 
-    public static List<Piece>? piecesTotal { get; set; }
+    public static List<Piece> piecesTotal { get; set; }
 
     public static int left
     {
@@ -39,7 +39,6 @@ public class Table
 
         } 
     }
-
     public static void Eject(Piece piece)
     {
         if (piece != null)
@@ -57,13 +56,22 @@ public class Table
     }
     public static void ToLeft(Piece piece)
     {
-        
-        piecesInGame.Add(piece);
+        if(piecesInGame==null)
+        {
+            List<Piece> pieces = new List<Piece>();
+            pieces.Add(piece);
+            piecesInGame = pieces;
+        }
+        else 
+            piecesInGame.Add(piece);    
     }
 
     public static void ToRight(Piece piece)
     {
-        piecesInGame.Insert(piecesInGame.Count, piece);
+        if(piecesInGame != null)
+        {
+            piecesInGame.Insert(piecesInGame.Count, piece);
+        }
     }
 
 }

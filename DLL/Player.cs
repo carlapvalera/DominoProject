@@ -34,6 +34,17 @@ public class Player : IPlayer//implementacion de la interface
         }
         Piece piece = strategy.PieceToPlay(itIsOkPlayed, this, cursor);
         Hand.Remove(piece);
+        if(piece == null)
+        {
+            if(Table.Pass ==null)
+            {
+                Table.Pass = new List<Player>();
+                Table.Pass.Add(this);
+            }
+            else 
+                Table.Pass.Add(this);   
+
+        }
         return piece;
     }
 }

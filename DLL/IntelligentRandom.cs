@@ -1,15 +1,6 @@
 ﻿namespace Project;
 public class IntelligentRandom : IStrategy
 {
-    List<Piece> itIsOkPlayed = new List<Piece>();
-    Player player = new Player();
-    int cursor = 0;
-    public IntelligentRandom(List<Piece> itIsOkPlayed, Player player, int cursor)
-    {
-        this.itIsOkPlayed = itIsOkPlayed;
-        this.player = player;
-        this.cursor = cursor;
-    }
     public IntelligentRandom()
     {
 

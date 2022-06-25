@@ -83,10 +83,9 @@ interface IAction
     List<Piece> ToSub(List<Piece> hand);// en el caso que las fichas no se puedan jugar en juego
 
 }
-interface IPassToPass
+interface IPassToPass:IEnumerable<Player>
 {
-    Player Current { get; }
-    void MoveNext();
+
 }
 #region
 //interface IPassToPass<T>
