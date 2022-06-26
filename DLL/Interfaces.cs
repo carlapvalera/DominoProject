@@ -13,7 +13,7 @@ interface IPlayer// interface que define a los jugadores que participan en el ju
     int CountPieces { get { return Hand.Count; } }//cantidad de fichas en mano
     string Name { get; }//nombre de cada jugador
     double Score { get; set; }// puntuacion del mismo
-    Piece? Play(int cursor);
+    Piece? Play(int cursor,Table table);
     /* metodo que devuelve la pieza que el jugador decea jugar aplicando la estrategia decidida por el usuario de esta forma en la
      que este metodo recibe la estrategia permite a un jugador aplicar mas de una */
     //Piece FirstPlay();//metodo que define la primera pieza que el jugador debe jugar en caso de que sea el primero
@@ -23,7 +23,7 @@ public interface IStrategy// interface que define las estrategias de cada jugado
     Piece PieceToPlay(List<Piece> itIsOkPlayed, Player player, int cursor);
     //metodo que define la pieza a jugar por el jugador que utilice esta estrategia
 
-    List<Piece> PieceCanPlay( List<Piece> itIsOkPlayed, Player player, int cursor)
+    List<Piece> PieceCanPlay( List<Piece> itIsOkPlayed, Player player, int cursor,Table table)
     /*lista de piezas que que se a partir de la que la estrategia escoge una para que el jugador jugue vale acotar que esta
     lista de fichas son nada mas que las que contienen las caras que ya se sabe previamente (se ha probado enel jugo que el
     jugador no lleva)*/
@@ -33,7 +33,7 @@ public interface IStrategy// interface que define las estrategias de cada jugado
         List<Piece> jugadasinteligentes = new List<Piece>();
         for (int i = 0; i < itIsOkPlayed.Count; i++)
         {
-            if (Table.left == itIsOkPlayed[i].left || Table.right == itIsOkPlayed[i].left)
+            if (table.left == itIsOkPlayed[i].left || table.right == itIsOkPlayed[i].left)
             {
                 aux.Add(itIsOkPlayed[i].right);
             }
@@ -54,7 +54,7 @@ public interface IStrategy// interface que define las estrategias de cada jugado
         return jugadasinteligentes;
     }
 }
-interface IFinal
+public interface IFinal
 {
     bool EndGame(List<Player> players);
 }
@@ -80,12 +80,27 @@ interface IAction
 {
     bool Add { get; set; }
     List<Piece> ToAdd(List<Piece> hand);// en el caso que las fichas se puedan jugar en cualquier momento del juego
-    List<Piece> ToSub(List<Piece> hand);// en el caso que las fichas no se puedan jugar en juego
+    List<Piece> ToSub(List<Piece> hand, Table table );// en el caso que las fichas no se puedan jugar en juego
 
 }
-interface IPassToPass:IEnumerable<Player>
+public interface IPassToPass
 {
+    Player Next(Player player);
+}
+interface ITable 
+{
+    List<Player> players { get; }
+    int[] stats { get; set; }
+    List<Piece> piecesInGame { get; set; }
+    List<Piece> piecesOutGame { get; set; }
+    List<Player> Pass { get; set; }
+    List<Piece> piecesTotal { get; set; }
+    int left{ get;}
+    int right{ get;}
+    void Eject(Piece piece);
+    public void ToLeft(Piece piece);
 
+    public void ToRight(Piece piece);
 }
 #region
 //interface IPassToPass<T>

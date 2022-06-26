@@ -4,7 +4,7 @@ namespace Project;
 public class Pass : IPassToPass
 {
     List<Player> players = new();
-    Player player = new();
+    Player player;
     public Pass(List<Player> players, Player player)
     {
         this.players = players;
@@ -21,7 +21,7 @@ public class Pass : IPassToPass
         List<Player> player_aux = new();
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i] ==player)
+            if (players[i] == player)
             {
                 for (int j = i; j < players.Count; j++)
                 {
@@ -29,24 +29,32 @@ public class Pass : IPassToPass
                 }
                 for (int k = 0; k < i; k++)
                 {
-                    player_aux.Insert(0,players[k]);
+                    player_aux.Insert(0, players[k]);
                 }
             }
 
         }
+        players = player_aux;
     }
-    public IEnumerator<Player> GetEnumerator()
+
+    public Player Next (Player player)
     {
-        for (int i = 0; i < players.Count; i++)
+        int aux = Equals(player);
+        if (aux == players.Count)
+            return players[0];
+        else
+            return players[aux + 1];
+    }
+    private int Equals( Player player)
+    {
+        int aux =0;
+        foreach (var item in players)
         {
-
-            yield return players[i];
+            if (player == item)
+                return aux;
+            aux++;
         }
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
+        return -1;
     }
 }
 //public class PassOpcional : IPassToPass

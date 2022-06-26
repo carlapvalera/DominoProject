@@ -2,25 +2,23 @@
 public class IntelligentBotagorda : IStrategy//implementacion de la interface
 {
     List<Piece> itIsOkPlayed = new List<Piece>();
-    Player player = new Player();
+    Player player;
     int cursor = 0;
-    public IntelligentBotagorda(List<Piece> itIsOkPlayed, Player player, int cursor)
+    Table table;
+    public IntelligentBotagorda(List<Piece> itIsOkPlayed, Player player, int cursor,Table table)
     {
         this.itIsOkPlayed = itIsOkPlayed;
         this.player = player;
         this.cursor = cursor;
-    }
-    public IntelligentBotagorda()
-    {
-
+        this.table = table; 
     }
 
 
     public Piece PieceToPlay(List<Piece> itIsOkPlayed, Player player, int cursor)
     {
         List<Piece> intelligentplays = new List<Piece>();
-        IStrategy istrategy = new IntelligentBotagorda();
-        intelligentplays = istrategy.PieceCanPlay(itIsOkPlayed, player, cursor);
+        IStrategy istrategy = new IntelligentBotagorda(itIsOkPlayed,player,cursor,table);
+        intelligentplays = istrategy.PieceCanPlay(itIsOkPlayed, player, cursor,table);
         if (intelligentplays != null)
         {
             return OK(intelligentplays);

@@ -1,21 +1,28 @@
 namespace Project;
-public class Table
+public class Table : ITable
 {
+    public Table(List<Player> players)
+    {
+        this.players = players;;
+        this.piecesInGame = new();
+        this.piecesOutGame = new();
+        Pass =new();
+        this.piecesTotal =new();
+
+    }
+    
     public List<Player> players { get; }
+    public int[] stats { get; set; }
 
-    public static IStart? start { get; set; }
+    public List<Piece> piecesInGame { get; set; }
 
-    public static int[] stats { get; set; }
+    public List<Piece> piecesOutGame { get; set; }
 
-    public static List<Piece> piecesInGame { get; set; }
+    public List<Player> Pass { get; set; }
 
-    public static List<Piece> piecesOutGame { get; set; }
+    public List<Piece> piecesTotal { get; set; }
 
-    public static List<Player> Pass { get; set; }
-
-    public static List<Piece> piecesTotal { get; set; }
-
-    public static int left
+    public int left
     {
         get
         {
@@ -28,7 +35,7 @@ public class Table
     }
 
 
-    public static int right 
+    public int right 
     {
         get
         {
@@ -39,7 +46,7 @@ public class Table
 
         } 
     }
-    public static void Eject(Piece piece)
+    public void Eject(Piece piece)
     {
         if (piece != null)
         {
@@ -54,7 +61,7 @@ public class Table
             stats[piece.right]++;
         }
     }
-    public static void ToLeft(Piece piece)
+    public void ToLeft(Piece piece)
     {
         if(piecesInGame==null)
         {
@@ -66,7 +73,7 @@ public class Table
             piecesInGame.Add(piece);    
     }
 
-    public static void ToRight(Piece piece)
+    public void ToRight(Piece piece)
     {
         if(piecesInGame != null)
         {

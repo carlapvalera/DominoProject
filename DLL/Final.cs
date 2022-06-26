@@ -1,14 +1,19 @@
 ﻿namespace Project; 
 public class Final : IFinal
 {
+    Table table;
+    public Final(Table table)
+    {
+        this.table = table;
+    }
     public bool EndGame(List<Player> players)//revisar el metodo el ultimo false
     {
         List<Player> notplay = new List<Player>();
         List<Player> order = new List<Player>();
         List<Player> pass = new();
-        if (Table.Pass != null || Table.Pass.Count !=0)
+        if (table.Pass != null || table.Pass.Count !=0)
         {
-            pass = Clone(Table.Pass);
+            pass = Clone(table.Pass);
 
             // debido al jugador en el que se inicializan los pases averiguar el ciclo necesario para que se termine el juego
             foreach (var item in players)
@@ -44,7 +49,6 @@ public class Final : IFinal
     //orden de los jugadores en que se necesitan pasar para terminar el juego
     {
         List<Player> aux = new();
-        Player many = new Player();
         int count = 0;
         int lol = 1;
         foreach (var item in players)
@@ -52,7 +56,7 @@ public class Final : IFinal
             if (player == item)
             {
                 aux.Add(item);
-                many = item;
+                player = item;
                 continue;
             }
             count++;

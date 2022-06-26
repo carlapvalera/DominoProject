@@ -3,17 +3,19 @@ public class Distribute : IDistribution
 {
     List<Player> players = new();
     int distribute = 0;
-    public Distribute(List<Player> players, int distribute)
+    Table table;
+    public Distribute(List<Player> players, int distribute,Table table)
     {
         this.players = players;
         this.distribute = distribute;
         Distribution();
+        this.table = table;
     }
     public void Distribution()
     {
         Random random = new Random();
         List<Piece> total = new List<Piece>();
-        total = Clone(Table.piecesTotal);
+        total = Clone(table.piecesTotal);
         for (int j = 0; j < distribute; j++)
             for (int i = 0; i < players.Count; i++)
             {
@@ -21,7 +23,7 @@ public class Distribute : IDistribution
                 players[i].Hand.Add(total[a]);
                 total.RemoveAt(a);
             }
-        Table.piecesOutGame = total;
+        table.piecesOutGame = total;
     }
     private List<Piece> Game (List<Player> players)
     {

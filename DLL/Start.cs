@@ -4,10 +4,12 @@ public class ClassicStart : IStart //implemetacion de la interface
     List<Player> players = new();
     Random random = new Random();
     List<Piece> pieceOutGame = new List<Piece>();
-    public ClassicStart(List<Player> players, List<Piece> pieceOutGame)
+    Table table;
+    public ClassicStart(List<Player> players, Table table)
     {
         this.players = players;
-        this.pieceOutGame = pieceOutGame;
+        this.pieceOutGame = table.piecesOutGame;
+        this.table = table;
     }
     public Piece Start()
     {
@@ -26,13 +28,14 @@ public class PlayerStart : IStart
 
     List<Piece> pieceOutGame = new();
     int aux = 0;
-    Table table = new Table();
-    public PlayerStart(List<Player> players, List<Piece> pieceOutGame)
+    Table table;
+    public PlayerStart(List<Player> players,Table table)
     {
         Random random = new Random();
         aux = random.Next(0, players.Count);
         this.players = players;
-        this.pieceOutGame = pieceOutGame;
+        this.pieceOutGame = table.piecesOutGame;
+        this.table = table; 
     }
 
     public Player First()
@@ -41,6 +44,6 @@ public class PlayerStart : IStart
     }
     public Piece Start()
     {
-        return players[aux].Play(aux);
+        return players[aux].Play(aux,table);
     }
 }

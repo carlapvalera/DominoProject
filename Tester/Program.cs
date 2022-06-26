@@ -1,9 +1,6 @@
 ﻿namespace Project;
 class Coach
 {
-    
-
-
     //Distribute distribute = new Distribute(players);
     static List<Player> players = new();
     public static void Jugadores()

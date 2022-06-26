@@ -1,10 +1,6 @@
 namespace Project;
 public class Player : IPlayer//implementacion de la interface
 {
-    public Player()
-    {
-
-    }
     public List<Piece> Hand { get; }
     public SortedSet<int> IDoNotHaveProvedInGame { get; }
     public int CountPieces { get { return Hand.Count; } }
@@ -12,6 +8,7 @@ public class Player : IPlayer//implementacion de la interface
     public double Score { get; set; }
 
     IStrategy strategy;
+    IMove move;
 
     public Player(string name, double score, IStrategy strategy)
     {
@@ -21,30 +18,19 @@ public class Player : IPlayer//implementacion de la interface
         IDoNotHaveProvedInGame = new SortedSet<int>();
         this.strategy = strategy;
     }
-    public Piece Play(int cursor)
+    public Piece Play(int cursor,Table table)
     {
-        Move move = new Move();
         List<Piece> itIsOkPlayed = new();
         itIsOkPlayed = move.itIsAOkPlayed(Hand);
         if (itIsOkPlayed.Count == 0)
         {
-            IDoNotHaveProvedInGame.Add(Table.left);
-            IDoNotHaveProvedInGame.Add(Table.right);
+            IDoNotHaveProvedInGame.Add(table.left);
+            IDoNotHaveProvedInGame.Add(table.right);
+            table.Pass.Add(this);
             return null;
         }
         Piece piece = strategy.PieceToPlay(itIsOkPlayed, this, cursor);
         Hand.Remove(piece);
-        if(piece == null)
-        {
-            if(Table.Pass ==null)
-            {
-                Table.Pass = new List<Player>();
-                Table.Pass.Add(this);
-            }
-            else 
-                Table.Pass.Add(this);   
-
-        }
         return piece;
     }
 }
